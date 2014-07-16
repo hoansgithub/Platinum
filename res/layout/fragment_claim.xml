@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="top|center"
+    android:padding="10dp">
+   
+
+    <EditText
+ 	    android:id="@+id/card_no_claim"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:hint="@string/hint_card_number"
+ 	    android:inputType="text" />
+    
+    <EditText
+ 	    android:id="@+id/total_beer"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:hint="@string/hint_total_beer"
+ 	    android:inputType="number" />
+ 	 <Button
+     android:layout_height="wrap_content"
+     android:layout_width="fill_parent"
+     android:text="@string/btn_down_the_hatch" />
+    
+</LinearLayout>

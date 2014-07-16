@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+   xmlns:app="http://schemas.android.com/apk/res/com.ikt.platinum">
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="top|center"
+    android:padding="10dp">
+
+ 	<EditText
+ 	    android:id="@+id/card_no"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:ems="10"
+ 	    android:hint="@string/hint_card_number"
+ 	    android:inputType="text" />
+
+ 	<EditText
+ 	    android:id="@+id/cus_email"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:ems="10"
+ 	    android:hint="@string/hint_cus_email"
+ 	    android:inputType="textEmailAddress" />
+ 	<EditText
+ 	    android:id="@+id/cus_name"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:ems="10"
+ 	    android:hint="@string/hint_cus_name"
+ 	    android:inputType="text" />
+ 	<org.jraf.android.backport.switchwidget.Switch
+ 	    android:checked="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    app:textOn="@string/switch_male"
+    app:textOff="@string/switch_female"
+    android:textSize="40sp"/>
+ 	<org.jraf.android.backport.switchwidget.Switch
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    app:textOn="@string/switch_vina"
+    app:textOff="@string/switch_expat"
+    android:textSize="40sp"/>
+ 	
+ 	<RadioGroup
+   android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+    <RadioButton android:id="@+id/radiominus35"
+        android:checked="true"
+         android:background="@android:color/transparent"
+         android:button="@android:color/transparent"
+         android:drawablePadding="-10dp"
+         android:gravity="center"
+         android:drawableTop="@drawable/custom_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/rad_minus_35"/>
+    <RadioButton android:id="@+id/radmiddle"
+         android:background="@android:color/transparent"
+         android:button="@android:color/transparent"
+         android:drawablePadding="-10dp"
+         android:gravity="center"
+          android:drawableTop="@drawable/custom_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <RadioButton android:id="@+id/radio50plus"
+         android:background="@android:color/transparent"
+         android:button="@android:color/transparent"
+         android:drawablePadding="-10dp"
+         android:gravity="center"
+          android:drawableTop="@drawable/custom_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/rad_50_plus"/>
+</RadioGroup>
+ <Button
+     android:layout_height="wrap_content"
+     android:layout_width="fill_parent"
+     android:text="@string/btn_start_flying" />
+</LinearLayout>
+</ScrollView>
