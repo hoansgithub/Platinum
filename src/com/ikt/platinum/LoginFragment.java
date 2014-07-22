@@ -181,6 +181,7 @@ public class LoginFragment extends Fragment implements IMyFragment {
 					if(serversc){
 						Toast toast = Toast.makeText(pcontext, "DONE !", duration);
 						toast.show();
+						reportField.setText("");
 					}
 					else{
 						Toast toast = Toast.makeText(pcontext, servermsg, duration);
