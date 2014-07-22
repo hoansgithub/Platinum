@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Platinum" parent="Theme.AppCompat">
+
+    <item name="android:editTextStyle">@style/EditTextPlatinum</item>
+
+    <item name="android:textColorHighlight">#9933b5e5</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewPlatinum</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxPlatinum</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonPlatinum</item>
+
+    <item name="android:buttonStyle">@style/ButtonPlatinum</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonPlatinum</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerPlatinum</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemPlatinum</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarPlatinum</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarPlatinum</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarPlatinum</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigPlatinum</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallPlatinum</item>
+
+    <item name="android:buttonStyleToggle">@style/TogglePlatinum</item>
+
+    <item name="android:listViewStyle">@style/ListViewPlatinum</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewPlatinum.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemPlatinum</item>
+
+     <item name="switchStyle">@style/Widget.Holo.CompoundButton.Switch</item>
+     <item name="switchPreferenceStyle">@style/Preference.SwitchPreference</item>
+  </style>
+
+</resources>

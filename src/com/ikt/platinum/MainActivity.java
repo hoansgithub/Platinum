@@ -9,11 +9,13 @@ import java.util.Vector;
 
 
 
+
 import com.ikt.platinum.TabUtil.TabInfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +27,10 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private ViewPager mViewPager;
     private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private PagerAdapter mPagerAdapter;
+    private Bundle bdle;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.bdle=savedInstanceState;
         fragments = new Vector<Fragment>();
         fragments.add(Fragment.instantiate(this, NewCustomerFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, ClaimFragment.class.getName()));
@@ -54,23 +58,13 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     }
    
     
-    
-    /** (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
-     */
-
-// 
-//    /** (non-Javadoc)
-//     * @see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
-//     */
-//    protected void onSaveInstanceState(Bundle outState) {
-//        outState.putString("tab", mTabHost.getCurrentTabTag()); //save the tab selected
-//        super.onSaveInstanceState(outState);
-//    }
- 
-    /**
-     * Initialise ViewPager
-     */
+    public void ReplaceLoginFragment()
+    {
+//    	this.mTabHost.getTabWidget().removeView(this.mTabHost.getTabWidget().getChildTabViewAt(2));
+//    	TabInfo tab3=new TabInfo("Logout", LogoutFragment.class, this.bdle);
+//    	mapTabInfo.remove("Login");
+//    	this.mapTabInfo.put(tab3.getTag(), tab3);
+    }
    
     private void intialiseViewPager() {
  
@@ -89,14 +83,15 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup();
      
-        TabInfo tab1=new TabInfo("New", NewCustomerFragment.class, args);
+        TabInfo tab1=new TabInfo("Register", NewCustomerFragment.class, args);
         TabInfo tab2=new TabInfo("Claim", ClaimFragment.class, args);
         TabInfo tab3=new TabInfo("Login", ClaimFragment.class, args);
-        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator("Tab1",getResources().getDrawable(R.drawable.tab_indicator_ab_example)), ( tab1));
+        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Register").setIndicator("Register"), ( tab1));
         this.mapTabInfo.put(tab1.getTag(), tab1);
-        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator("Tab2",getResources().getDrawable(R.drawable.tab_indicator_ab_example)), ( tab2));
+        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Claim").setIndicator("Claim"), ( tab2));
         this.mapTabInfo.put(tab2.getTag(), tab2);
-        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab3").setIndicator("Tab3",getResources().getDrawable(R.drawable.tab_indicator_ab_example)), ( tab2));
+//        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Login").setIndicator("Login",getResources().getDrawable(R.drawable.tab_indicator_ab_example)), ( tab2));
+        TabUtil.AddTab(this, this.mTabHost, this.mTabHost.newTabSpec("Login").setIndicator("Login"), ( tab3));
         this.mapTabInfo.put(tab3.getTag(), tab3);
         mTabHost.setOnTabChangedListener(this);
     }

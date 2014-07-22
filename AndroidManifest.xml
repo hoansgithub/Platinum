@@ -7,23 +7,32 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="20" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".PlatinumApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/PlatinumTheme" >
+        android:theme="@style/Platinum" >
         <activity
-            android:name="com.ikt.platinum.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+            
+        </activity>
+        <activity android:name=".PreferenceActivity" />
+        <activity
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:name=".LoadingActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity android:name="com.ikt.platinum.PreferenceActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="EditTextPlatinum" parent="android:Widget.EditText">
+	  <item name="android:background">@drawable/platinum_edit_text_holo_dark</item>
+	  <item name="android:textColor">#ffffff</item>
+  </style>
+
+  <style name="AutoCompleteTextViewPlatinum" parent="android:Widget.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/platinum_list_selector_holo_dark</item>
+	  <item name="android:background">@drawable/platinum_edit_text_holo_dark</item>
+	  <item name="android:textColor">#ffffff</item>
+  </style>
+
+  <style name="CheckBoxPlatinum" parent="android:Widget.CompoundButton.CheckBox">
+      <item name="android:button">@drawable/platinum_btn_check_holo_dark</item>
+  </style>
+
+  <style name="RadioButtonPlatinum" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/platinum_btn_radio_holo_dark</item>
+  </style>
+
+  <style name="ButtonPlatinum" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/platinum_btn_default_holo_dark</item>
+	  <item name="android:minHeight">48dip</item>
+	  <item name="android:minWidth">64dip</item>
+	  <item name="android:textColor">#ffffff</item>
+  </style>
+
+  <style name="ImageButtonPlatinum" parent="android:Widget.ImageButton">
+	  <item name="android:background">@drawable/platinum_btn_default_holo_dark</item>
+  </style>
+
+  <style name="SpinnerPlatinum" parent="android:Widget.Spinner">
+      <item name="android:background">@drawable/platinum_spinner_background_holo_dark</item>
+      <item name="android:dropDownSelector">@drawable/platinum_list_selector_holo_dark</item>
+  </style>
+
+  <style name="SpinnerDropDownItemPlatinum" parent="android:Widget.DropDownItem.Spinner">
+      <item name="android:checkMark">@drawable/platinum_btn_radio_holo_dark</item>
+  </style>
+  <style name="TabPlatinum">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@drawable/platinum_tab_indicator_holo</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+
+  <style name="TabTextPlatinum">
+	  <item name="android:textColor">#ffffff</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <!-- v14 <item name="android:textAllCaps">true</item> -->
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>
+
+  <style name="ProgressBarPlatinum" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/platinum_progress_horizontal_holo_dark</item>
+      <item name="android:indeterminateDrawable">@drawable/platinum_progress_indeterminate_horizontal_holo_dark</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="SeekBarPlatinum" parent="android:Widget.SeekBar">
+      <item name="android:progressDrawable">@drawable/platinum_scrubber_progress_horizontal_holo_dark</item>
+      <item name="android:indeterminateDrawable">@drawable/platinum_scrubber_progress_horizontal_holo_dark</item>
+      <item name="android:minHeight">13dip</item>
+      <item name="android:maxHeight">13dip</item>
+      <item name="android:thumb">@drawable/platinum_scrubber_control_selector_holo_dark</item>
+      <item name="android:thumbOffset">16dip</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+  </style>
+
+  <style name="RatingBarPlatinum" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/platinum_ratingbar_full_holo_dark</item>
+      <item name="android:indeterminateDrawable">@drawable/platinum_ratingbar_full_holo_dark</item>
+  </style>
+
+  <style name="RatingBarBigPlatinum" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/platinum_ratingbar_holo_dark</item>
+      <item name="android:indeterminateDrawable">@drawable/platinum_ratingbar_holo_dark</item>
+      <item name="android:minHeight">35dip</item>
+      <item name="android:maxHeight">35dip</item>
+  </style>
+
+  <style name="RatingBarSmallPlatinum" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/platinum_ratingbar_small_holo_dark</item>
+      <item name="android:indeterminateDrawable">@drawable/platinum_ratingbar_small_holo_dark</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="TogglePlatinum" parent="android:Widget.Button.Toggle">
+      <item name="android:background">@drawable/platinum_btn_toggle_holo_dark</item>
+      <item name="android:minHeight">48dip</item>
+	  <item name="android:textColor">#ffffff</item>
+  </style>
+
+  <style name="ListViewPlatinum" parent="android:Widget.ListView">
+      <item name="android:listSelector">@drawable/platinum_list_selector_holo_dark</item>
+  </style>
+
+  <style name="ListViewPlatinum.White" parent="android:Widget.ListView.White">
+      <item name="android:listSelector">@drawable/platinum_list_selector_holo_dark</item>
+  </style>
+
+  <style name="SpinnerItemPlatinum" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+      <item name="android:textColor">#ffffff</item>
+  </style>
+
+</resources>
