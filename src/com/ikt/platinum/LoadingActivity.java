@@ -44,11 +44,11 @@ public class LoadingActivity extends FragmentActivity  {
 					//list.add(venuename);
 					((PlatinumApplication)this.getApplication()).setVENUES(venueList);
 	            }
-	            Intent i = new Intent(LoadingActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
+	            
 			}
-			
+			Intent i = new Intent(LoadingActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
 			
 		} catch (Exception e) {
 			Context context = this;
@@ -56,6 +56,9 @@ public class LoadingActivity extends FragmentActivity  {
 
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
+			 Intent i = new Intent(LoadingActivity.this, MainActivity.class);
+             startActivity(i);
+             finish();
 		}
     }
    
