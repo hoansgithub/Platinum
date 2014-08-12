@@ -6,9 +6,12 @@ import java.util.concurrent.ExecutionException;
 
 import org.json.JSONObject;
 
+import com.ikt.platinum.model.Record;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +28,16 @@ public class ClaimFragment extends Fragment implements IMyFragment {
 	private EditText textValue;
 	private Activity pcontext;
 	private int duration ;
+	private String service_host;
+	private DatabaseHandler dbhandler;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		this.inflater=inflater;
 		this.container=container;
 		this.duration= Toast.LENGTH_SHORT;
 		this.pcontext=getActivity();
-		
+		this.dbhandler=new DatabaseHandler(this.getActivity());
+		this.service_host=((PlatinumApplication)getActivity().getApplication()).getSERVICE_HOST();
 		 rootView = inflater.inflate(R.layout.fragment_claim,
 				container, false);
 		 textCardno=(EditText) rootView.findViewById(R.id.card_no_claim);
@@ -78,15 +84,22 @@ public class ClaimFragment extends Fragment implements IMyFragment {
 		}
 		else{
 			Map<String, Object> params = new HashMap<String, Object>();   
+			Time now = new Time();
+			now.setToNow();
+			String curdate=now.year+"/"+(now.month+1)+"/"+now.monthDay;
+			String curTime=now.hour+":"+now.minute+":"+now.second;
 			  params.put("cardnumber", cardnumber);
 			  params.put("quantity",val);
 			  params.put("pg_id",pgid);
 			  params.put("venue_id",venue_id);
+			  params.put("curdate",curdate);
+			  params.put("curtime",curTime);
 			  WebServiceController svc=new WebServiceController();
 			  
 			try {
-				String res= svc.execute(new WebServiceProperties("http://demo.iktknowledge.com/PlatinumWeb/service/add-claim", params)).get();
-				
+				String res= svc.execute(new WebServiceProperties(this.service_host+"/add-claim", params)).get();
+				if(res!=null)
+				{
 				JSONObject result = new JSONObject(res);
 				boolean serversc=result.getBoolean("success");
 				String servermsg=result.getString("msg");
@@ -99,6 +112,15 @@ public class ClaimFragment extends Fragment implements IMyFragment {
 					resetFields();
 					Toast toast2 = Toast.makeText(pcontext, "DONE !", duration);
 					toast2.show();
+				}
+				}
+				else{
+					
+					this.dbhandler.addRecord(new Record(0,curTime, curdate, val, venue_id, pgid,cardnumber, 2));
+					Toast toast = Toast.makeText(pcontext, "DONE !", duration);
+					toast.show();
+					resetFields();
+				
 				}
 				
 			} catch (Exception e) {

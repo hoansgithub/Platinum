@@ -1,4 +1,4 @@
-package com.ikt.platinum;
+package com.ikt.platinum.model;
 
 public class Venue {
  private int venue_id;
@@ -6,6 +6,9 @@ public class Venue {
 public Venue(int venueid, String venuename) {
 	this.venue_id=venueid;
 	this.venue_name=venuename;
+}
+public Venue() {
+	// TODO Auto-generated constructor stub
 }
 public int getVenue_id() {
 	return venue_id;

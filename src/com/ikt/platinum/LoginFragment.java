@@ -9,10 +9,15 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.ikt.platinum.model.Record;
+import com.ikt.platinum.model.User;
+import com.ikt.platinum.model.Venue;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,55 +39,25 @@ public class LoginFragment extends Fragment implements IMyFragment {
 	private EditText pswdField;
 	private EditText reportField;
 	private Activity pcontext;
-	
+	private String service_host;
 	private int duration ;
+	private DatabaseHandler  dbhandler; 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		this.inflater=inflater;
 		this.duration= Toast.LENGTH_SHORT;
 		this.pcontext=getActivity();
+		this.service_host=((PlatinumApplication)getActivity().getApplication()).getSERVICE_HOST();
 		rootView = this.inflater.inflate(R.layout.fragment_login,container, false);
 		this.pswdField=(EditText) rootView.findViewById(R.id.login_password);
 		this.reportField=(EditText) rootView.findViewById(R.id.venue_total);
 		venueSpinner=(Spinner)rootView.findViewById(R.id.venue_spinner);
+		this.dbhandler=new DatabaseHandler(this.getActivity());
 	//	List<String> list = new ArrayList<String>();
 		venueList=((PlatinumApplication)getActivity().getApplication()).getVENUES();
 		  WebServiceController svc=new WebServiceController();
 		 // if(venueList==null){venueList=new ArrayList<Venue>();}
-		  if(((PlatinumApplication)getActivity().getApplication()).getVENUES().size()==0)
-		  {  
-			  venueList=new ArrayList<Venue>();
-		 try {
-			  
-			  Map<String, Object> params = new HashMap<String, Object>();   
-			  params.put("param", 0);
-			  
-		
-			String res= svc.execute(new WebServiceProperties("http://demo.iktknowledge.com/PlatinumWeb/service/get-venues", params)).get();
-			if (null != res) {
-	            JSONArray result = new JSONArray(res);
-	            for(int i=0;i<result.length();i++)
-	            {
-	            	
-					JSONObject o=(JSONObject) result.get(i);
-					String venuename = o.getString("venue_name");
-					int venueid=o.getInt("venue_id");
-					venueList.add(new Venue(venueid,venuename));
-					//list.add(venuename);
-					((PlatinumApplication)getActivity().getApplication()).setVENUES(venueList);
-	            }
-			}
-			
-			
-		} catch (Exception e) {
-			Context context = getActivity();
-			CharSequence text = "Connection error";
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-		}
-		
-		 }
+		 
 		  this.loadVenueSpinner();
 		
 		//onclick implement
@@ -147,7 +122,9 @@ public class LoginFragment extends Fragment implements IMyFragment {
 	{
 		
 		List<String> list=new ArrayList<String>();
-		for(int v=0;v<((PlatinumApplication)getActivity().getApplication()).getVENUES().size();v++){
+		List<Venue> vn=((PlatinumApplication)getActivity().getApplication()).getVENUES();
+		
+		for(int v=0;v<vn.size();v++){
 			String vname=((PlatinumApplication)getActivity().getApplication()).getVENUES().get(v).getVenue_name();
 			list.add(vname);
 		}
@@ -169,23 +146,39 @@ public class LoginFragment extends Fragment implements IMyFragment {
 				int venue_id=((PlatinumApplication)getActivity().getApplication()).getVENUE_ID();
 				int pgid=((PlatinumApplication)getActivity().getApplication()).getPGID();
 				Map<String, Object> params = new HashMap<String, Object>();   
+				Time now = new Time();
+				now.setToNow();
+				String curdate=now.year+"/"+(now.month+1)+"/"+now.monthDay;
+				String curTime=now.hour+":"+now.minute+":"+now.second;
 				  params.put("total",total);
 				  params.put("pg_id",pgid);
 				  params.put("venue_id",venue_id);
+				  params.put("curdate",curdate);
+				  params.put("curtime",curTime);
 				  WebServiceController svc=new WebServiceController();
 				try {
-					String res= svc.execute(new WebServiceProperties("http://demo.iktknowledge.com/PlatinumWeb/service/venue-report", params)).get();
-					JSONObject result = new JSONObject(res);
-					boolean serversc=result.getBoolean("success");
-					String servermsg=result.getString("msg");
-					if(serversc){
+					String res= svc.execute(new WebServiceProperties(this.service_host+"/venue-report", params)).get();
+					if(res!=null)
+					{
+						JSONObject result = new JSONObject(res);
+						boolean serversc=result.getBoolean("success");
+						String servermsg=result.getString("msg");
+						if(serversc){
+							Toast toast = Toast.makeText(pcontext, "DONE !", duration);
+							toast.show();
+							reportField.setText("");
+						}
+						else{
+							Toast toast = Toast.makeText(pcontext, servermsg, duration);
+							toast.show();
+						}
+					}
+					else{
+						int qtity=Integer.parseInt(total);
+						this.dbhandler.addRecord(new Record(0,curTime, curdate, qtity, venue_id, pgid,0, 2));
 						Toast toast = Toast.makeText(pcontext, "DONE !", duration);
 						toast.show();
 						reportField.setText("");
-					}
-					else{
-						Toast toast = Toast.makeText(pcontext, servermsg, duration);
-						toast.show();
 					}
 				} catch (Exception e) {
 					Toast toaste = Toast.makeText(pcontext, "connection error", duration);
@@ -222,16 +215,18 @@ public class LoginFragment extends Fragment implements IMyFragment {
 			  params.put("venue_id", selectedVenueID);
 			  WebServiceController svc=new WebServiceController();
 			  try{
-			String res= svc.execute(new WebServiceProperties("http://demo.iktknowledge.com/PlatinumWeb/service/get-auth", params)).get();
+			String res= svc.execute(new WebServiceProperties(this.service_host+"/get-auth", params)).get();
 			if (null != res) {
 	            JSONObject result = new JSONObject(res);
 	            boolean checklogin=result.getBoolean("success");
 	            boolean ismanager=result.getBoolean("is_mg");
 	            if(checklogin)
 	            {
+	            	this.dbhandler.deleteAllUser();
 	            	((PlatinumApplication)getActivity().getApplication()).setMANAGER(ismanager);
 	            	((PlatinumApplication)getActivity().getApplication()).setVENUE_ID(selectedVenueID);
 	            	((PlatinumApplication)getActivity().getApplication()).setPGID(result.getInt("pg_id"));
+	            	this.dbhandler.addUser(new User(result.getInt("pg_id"), ismanager, selectedVenueID));
 	            	LinearLayout loginlo=(LinearLayout) rootView.findViewById(R.id.login_layout);
 	    			loginlo.setVisibility(LinearLayout.INVISIBLE);
 	    			LinearLayout logoutlo=(LinearLayout) rootView.findViewById(R.id.logout_layout);
@@ -281,7 +276,7 @@ public class LoginFragment extends Fragment implements IMyFragment {
 	}
 	public void logoutClick(View view)
 	{
-		
+		dbhandler.deleteAllUser();
 		LinearLayout loginlo=(LinearLayout) rootView.findViewById(R.id.login_layout);
 		loginlo.setVisibility(LinearLayout.VISIBLE);
 		LinearLayout logoutlo=(LinearLayout) rootView.findViewById(R.id.logout_layout);

@@ -3,6 +3,8 @@ package com.ikt.platinum;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ikt.platinum.model.Venue;
+
 import android.app.Application;
 
 public class PlatinumApplication extends Application {
@@ -11,6 +13,7 @@ public class PlatinumApplication extends Application {
 	 	private int VENUE_ID=0;
 	 	private boolean MANAGER=false;
 	 	private List<Venue> VENUES;
+	 	private String SERVICE_HOST="http://demo.iktknowledge.com/PlatinumWeb/service";
 		public boolean isLOGGED_IN() {
 			return LOGGED_IN;
 		}
@@ -53,6 +56,10 @@ public class PlatinumApplication extends Application {
 
 		public void setMANAGER(boolean mANAGER) {
 			MANAGER = mANAGER;
+		}
+
+		public String getSERVICE_HOST() {
+			return SERVICE_HOST;
 		}
 
 	   

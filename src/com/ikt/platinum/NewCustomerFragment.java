@@ -45,12 +45,14 @@ public class NewCustomerFragment extends Fragment implements IMyFragment {
 	          "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
 	          ")+"
 	      );
+	private String service_host;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		this.inflater=inflater;
 		this.container=container;
 		this.duration= Toast.LENGTH_SHORT;
 		this.pcontext=getActivity();
+		this.service_host=((PlatinumApplication)getActivity().getApplication()).getSERVICE_HOST();
 		 rootView = this.inflater.inflate(R.layout.fragment_new_customer,container, false);
 		 rad35=(RadioButton) rootView.findViewById(R.id.radiominus35);
 		 radmiddle=(RadioButton) rootView.findViewById(R.id.radmiddle);
@@ -141,7 +143,7 @@ public class NewCustomerFragment extends Fragment implements IMyFragment {
 			  WebServiceController svc=new WebServiceController();
 			  	try {
 			  		
-				String res= svc.execute(new WebServiceProperties("http://demo.iktknowledge.com/PlatinumWeb/service/new-customer", params)).get();
+				String res= svc.execute(new WebServiceProperties(this.service_host+"/new-customer", params)).get();
 				
 				JSONObject result = new JSONObject(res);
 				boolean serversc=result.getBoolean("success");
